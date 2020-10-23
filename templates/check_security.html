@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-xl-6 col-lg-8">
+          <h1>Credential Audit.<span>.</span></h1>
+          <h2>Find your vulnerabilities now with <strong>Nessus</strong></h2>
+        </div>
+      </div>
+
+      <div class="row mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+        <div class="col-xl-2 col-md-4 col-6">
+          <div class="btn-group">
+            <button id="myButton1">Generate Wordlist</button>
+            <button id="myButton2">Check Security</button>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+  </section>
+
+  <script type="text/javascript">
+    document.getElementById("myButton1").onclick = function () {
+        location.href = "/credentialAudit/generateWordlist";
+    };
+  </script>
+
+  <script type="text/javascript">
+    document.getElementById("myButton2").onclick = function () {
+        location.href = "/credentialAudit/checkSecurity";
+    };
+  </script>
+  <section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" id="check" data-aos="fade-up">
+      <h1>Check Security</h1>
+      <div class="row mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+        
+          <form method="post">
+            <label for="server" style="color: white;">Enter the Mail Server:</label><br>
+            <input type="text" name="server"><br><br>
+            <label for="hostname" style="color: white;">Enter the Target Email ID:</label><br>
+            <input type="check" name="email"><br><br>
+            <input type="submit" name="check" value="Check">
+          </form>
+      </div>
+  </div>
+</section>
+
+{% if result %}
+<section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" id="result" data-aos="fade-up">
+      <b><h2>Results</h2></b>
+      <div class="row mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250" style="color:white;">
+          {% for list in result %}
+            {{list}}
+            <br>
+          {% endfor %}
+      </div>
+
+    </div>
+  </section>
+{% endif %}
+
+<script type="text/javascript">
+  window.location.hash = '{{id}}'
+</script>
+
+{% endblock %}

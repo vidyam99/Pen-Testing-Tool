@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<style type="text/css">
+		label, h3 {
+			color: white;
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+
+   <section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+        <div class="col-xl-6 col-lg-8">
+          <h1>Credential Audit.<span>.</span></h1>
+          <h2>Find your vulnerabilities now with <strong>Nessus</strong></h2>
+        </div>
+      </div>
+
+      <div class="row mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+        <div class="col-xl-2 col-md-4 col-6">
+          <div class="btn-group">
+            <button id="myButton1">Generate Wordlist</button>
+            <button id="myButton2">Check Security</button>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+  </section>
+
+  <script type="text/javascript">
+    document.getElementById("myButton1").onclick = function () {
+        location.href = "/credentialAudit/generateWordlist";
+    };
+  </script>
+
+  <script type="text/javascript">
+    document.getElementById("myButton2").onclick = function () {
+        location.href = "/credentialAudit/checkSecurity";
+    };
+  </script>
+
+  <section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container"  id="generate" data-aos="fade-up">
+      <div class="row mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+          <!-- <form method="post">
+            <label for="server" style="color: white;">Enter the Mail Server:</label><br>
+            <input type="text" name="server"><br><br>
+            <label for="hostname" style="color: white;">Enter the Target Email ID:</label><br>
+            <input type="check" name="email"><br><br>
+            <input type="submit" name="check" value="Check">
+          </form> -->
+          <h1>Generate Password Wordlist</h1>
+    	<h3>Please answer as many as you can to build the best possible word list</h3>
+    	<br><br><br>
+		<form method ='post'>
+		<div class="row">
+			<div class="col-xl-6 col-lg-8">
+				<label>Enter Target's first name: </label>
+				<input type="text" name="FirstName"><br>
+			    <label>Enter Target's last name: </label>
+			    <input type="text" name="LastName"><br>
+			    <label>Target date of birth YEAR: </label>
+			    <input type="number" name="TargetYear"><br>
+			    <label>Target date of birth MONTH: </label>
+			    <input type="number" name="TargetMonth"><br>
+			</div>
+			<div class="col-xl-6 col-lg-8">
+			    <label>Target data of birth DAY: </label>
+			    <input type="number" name="TargetDay"><br>
+			    <label>Is the target married? Y , N</label>
+			    <input type="text" name="married"><br>
+			    <label>Does the target have a kid? Y , N</label>
+			    <input type="text" name="kids"><br>
+			    <label>Does the target have a pet? Y , N</label>
+			    <input type="text" name="pets"><br>
+			</div>
+		</div>
+			<div>
+				<label>If Married is Y -> </label>
+		    	<label>Spouse Name: </label>
+		    	<input type="text" name="targetspousename">
+        		<label>What year was the target married on? </label>
+        		<input type="number" name="targetmarrieddate">
+			</div>
+		    <div>
+	    		<label>If Kids is Y -> </label>
+	        	<label>Child first name: </label>
+	        	<input type="text" name="targetkidname">
+	        	<label>Child year of birth: </label>
+	        	<input type="number" name="targetkidage">
+	        </div>
+	        <div>
+	    		<label>If Pets if Y -> </label>
+	    		<label>Pet's name: </label>
+	    		<input type="text" name="targetpetname">
+	        	<label>What kind of pet? </label>
+	        	<input type="text" name="targetpettype">
+	        </div><br><br>
+			<input type="submit" name="generate" value="Generate">
+		</form>
+      </div>
+  </div>
+</section>
+
+{% if result %}
+<section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container" id="result" data-aos="fade-up">
+      <b><h2>Results</h2></b>
+      <div class="row mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250" style="color:white;">
+          {% for list in result %}
+            {{list}}
+            <br>
+          {% endfor %}
+      </div>
+
+    </div>
+  </section>
+{% endif %}
+
+<script type="text/javascript">
+  window.location.hash = '{{id}}'
+</script>
+
+{% endblock %}
